@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# Newegg
+echo Newegg: $(curl http://www.newegg.ca/Product/Product.aspx?Item=N82E16834232776 2>/dev/null | grep product_sale_price | sed -e "s/.*'\(.*\)'.*/\1/")
+
+# CanadaComputers
+echo Canada Computers: $(curl http://www.canadacomputers.com/product_info.php?item_id=088306 2>/dev/null | xmllint --xpath '//span[@id="SalePrice"]/text()' --html - 2>/dev/null)
+
+# BestBuy
+echo Best Buy: $(curl http://www.bestbuy.ca/en-CA/product/asus-asus-zenbook-ux303-13-3-touchscreen-laptop-brown-intel-core-i5-6200u-256gb-ssd-8gb-ram-win10-eng-ux303ua-dh51t/10400440.aspx 2>/dev/null | xmllint --xpath '//*[@class="price-wrapper price-extra-large"]//*[@class="amount"]/text()' --html - 2>/dev/null)
+
+# Amazon1
+echo Amazon: $(curl http://www.amazon.ca/Zenbook-UX303UA-DH51T-I5-6200U-13-3in-Windows/dp/B014VHW24Y 2>/dev/null | xmllint --xpath '//*[@id="priceblock_ourprice"]/text()' --html - 2>/dev/null)
+
+# Amazon2
+echo Amazon: $(curl http://www.amazon.ca/ASUS-ZenBook-UX303UA-DH51T-Multi-Touch-Notebook/dp/B017281B96 2>/dev/null | xmllint --xpath '//*[@id="priceblock_ourprice"]/text()' --html - 2>/dev/null)
+
+# NCIX
+echo NCIX: $(curl --compressed http://www.ncix.com/detail/asus-zenbook-ux303ua-i5-6200u-43-115554-1766.htm 2>/dev/null | xmllint --xpath '//*[@itemprop="price"]/text()' --html - 2>/dev/null)
